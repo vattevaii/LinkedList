@@ -4,10 +4,10 @@ namespace LinkList
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             LIST list = null;
-            bool b = new bool();
+            bool b;
             do
             {
                 b = true;
@@ -16,9 +16,11 @@ namespace LinkList
                 const string B = " 2 -- Display List\n";
                 const string E = " 3 -- Delete List\n";
                 const string F = " 4 -- Go To A List\n";
-                const string C = " 5 -- Exit\n";
+                const string M = " 5 -- Merge Two Lists\n";
+                const string C = " 6 -- Exit\n";
                 const string D = " Please Insert Valid Choice\n";
-                Console.WriteLine(A+B+E+F+C);
+                // TODO   Merge 2 Similar types of List  in main 
+                Console.WriteLine(A+B+E+F+M+C);
                 Console.Write("Your Choice : ");
                 string choice = Console.ReadLine();
 
@@ -28,7 +30,14 @@ namespace LinkList
                         CreateList(ref list);
                         break;
                     case "2":
-                        DisplayList(list);
+                        int count = 0;
+                        DisplayList(list, "",ref count);
+                        count = 0;
+                        DisplayList(list, "Normal",ref count);
+                        count = 0;
+                        DisplayList(list, "Circular", ref count);
+                        count = 0;
+                        DisplayList(list, "TwoWay", ref count);
                         break;
                     case "3":
                         DeleteList(ref list);
@@ -37,6 +46,9 @@ namespace LinkList
                         LoadNodes(ref list);
                         break;
                     case "5":
+                        MergeLists(ref list);
+                        break;
+                    case "6":
                         b = false;
                         break;
                     default:
@@ -47,6 +59,7 @@ namespace LinkList
             } while (b);
 
         }
+
         /// <summary>
         /// Valid Input indicates a number which is not less than 1
         /// </summary>
@@ -54,7 +67,7 @@ namespace LinkList
         /// <returns></returns>
         private static int ValidInput(string a)
         {
-            int input = 0;
+            int input;
             bool tries = true;
             do
             {
@@ -62,8 +75,15 @@ namespace LinkList
                     Console.WriteLine("Please Enter Valid Number\n");
                 Console.Write(a);
                 string s = Console.ReadLine();
-                input = 0;
-                tries = int.TryParse(s, out input);
+
+                if (!int.TryParse(s, out input))
+                {
+                    tries = false;
+                }
+                else
+                {
+                    tries = true;
+                }
                 input--;
                 //input of less than 0
                 if (input < 0)
@@ -150,7 +170,7 @@ namespace LinkList
                 else if (p == null)
                 {
                     ll = l.GetNext();
-                    l = null;
+                    //l = null;
                     Console.WriteLine($"List {input + 1} was deleted..");
                 }
                 //Delete Parent->next
@@ -170,7 +190,7 @@ namespace LinkList
         /// <param name="ll"></param>
         private static void CreateList(ref LIST ll)
         {
-            int ind = new int();
+            int ind; // = new int();
             if(ll == null)
             {
                 ll = new LIST();
@@ -187,26 +207,79 @@ namespace LinkList
 
 
         /// <summary>
-        /// Displaying All List
+        /// Displaying List according to given type
         /// Not Nodes
         /// </summary>
         /// <param name="ll"></param>
-        private static void DisplayList(LIST ll)
+        public static void DisplayList(LIST ll, string type, ref int count)
         {
             LIST next = ll;
             if (next == null)
             {
-                Console.WriteLine("NO Lists CREATED...");
+                if(type == "")
+                    Console.WriteLine("NO Lists CREATED...");
+                return;
             }
             else
             {
-                while (next != null) 
+                while (next != null)
                 {
-                    LIST.DisplayList(next);
+                    LIST.DisplayList(next, type, ref count);
                     next = next.GetNext();
                 }
+                Console.WriteLine("\n");
             }
-        }      
-        //End Of Class PROGRAM
+        }
+
+        /// <summary>
+        /// Merging Two Similar Lists
+        /// </summary>
+        /// <param name="list"></param>
+        private static void MergeLists(ref LIST list)
+        {
+            // List is Empty
+            if (list == null)
+            {
+                Console.WriteLine("Create A List First");
+                return;
+            }
+            int count1 = 0, count2 = 0, count3 = 0;
+            DisplayList(list, "Normal", ref count1);
+            DisplayList(list, "Circular", ref count2);
+            DisplayList(list, "TwoWay", ref count3);
+            if (count1 > 1)
+            {
+                Console.WriteLine(" Merge Two Normal LinkedList\n?(Y/N)");
+                string opt = Console.ReadLine();
+                if (opt.ToLower() == "y")
+                {
+                    LIST.MergeLists(ref list, "Normal");
+                    return;
+                }
+            }
+            if (count2 > 1)
+            {
+                Console.WriteLine(" Merge Two Circular LinkedList\n?(Y/N)");
+                string opt = Console.ReadLine();
+                if (opt.ToLower() == "y")
+                {
+                    LIST.MergeLists(ref list, "Circular");
+                    return;
+                }
+            }
+            if(count3 > 1)
+            {
+                Console.WriteLine(" Merge Two TwoWay LinkedList\n?(Y/N)");
+                string opt = Console.ReadLine();
+                if (opt.ToLower() == "y")
+                {
+                    LIST.MergeLists(ref list, "TwoWay");
+                    return;
+                }
+            }
+            Console.WriteLine(" \n\n ");
+        }
+//End Of Class PROGRAM
+
     }
 }

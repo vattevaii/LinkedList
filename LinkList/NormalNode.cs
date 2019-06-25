@@ -17,7 +17,7 @@ namespace LinkList
 
         void INode.InsertNodes()
         {
-            bool b = new bool();
+            bool b;// = new bool();
             do
             {
                 const string C = " Please Insert Valid Choice\n";
@@ -63,8 +63,10 @@ namespace LinkList
             }
             else
             {
-                NormalNode newNode = new NormalNode();
-                newNode.info = ii;
+                NormalNode newNode = new NormalNode
+                {
+                    info = ii
+                };
                 NormalNode current = this;
                 Console.Write("\nAfter which Data You want to Store : ");
                 String cmp = Console.ReadLine();
@@ -98,8 +100,10 @@ namespace LinkList
             }
             else
             {
-                NormalNode newNode = new NormalNode();
-                newNode.info = ii;
+                NormalNode newNode = new NormalNode
+                {
+                    info = ii
+                };
                 NormalNode current = this;
                 while(current.next != null)
                 {
@@ -123,9 +127,11 @@ namespace LinkList
             }
             else
             {
-                NormalNode newNode = new NormalNode();
-                newNode.info = this.info;
-                newNode.next = this.next;
+                NormalNode newNode = new NormalNode
+                {
+                    info = this.info,
+                    next = this.next
+                };
                 this.info = ii;
                 this.next = newNode;
             }
@@ -133,7 +139,7 @@ namespace LinkList
 
         void INode.DeleteNodes()
         {
-            bool b = new bool();
+            bool b;// = new bool();
             do
             {
                 const string C = " Please Insert Valid Choice\n";
@@ -189,7 +195,7 @@ namespace LinkList
                 else
                 {
                     parent.next = null;
-                    current = null;
+                    //current = null;
                 }
             }
         }
@@ -212,7 +218,7 @@ namespace LinkList
                 {
                     this.info = current.info;
                     this.next = current.next;
-                    current = null;
+                    //current = null;
                 }
             }
         }
@@ -247,7 +253,7 @@ namespace LinkList
                 else
                 {
                     parent.next = current.next;
-                    current = null;
+                    //current = null;
                 }
             }
         }

@@ -18,13 +18,13 @@ namespace LinkList
 
         void INode.InsertNodes()
         {
-            bool b = new bool();
+            bool b;
             do
             {
                 const string C = " Please Insert Valid Choice\n";
                 b = true;
                 Console.Clear();
-                Option.InsertNormal();
+                Option.InsertTwoWay();
                 this.DisplayAll();
                 Console.Write("Your Choice : ");
                 string choice = Console.ReadLine();
@@ -69,8 +69,10 @@ namespace LinkList
             }
             else
             {
-                TwoWayNode newNode = new TwoWayNode();
-                newNode.info = ii;
+                TwoWayNode newNode = new TwoWayNode
+                {
+                    info = ii
+                };
                 TwoWayNode current = this;
                 Console.Write("\nAfter which Data You want to Store : ");
                 String cmp = Console.ReadLine();
@@ -106,8 +108,10 @@ namespace LinkList
             }
             else
             {
-                TwoWayNode newNode = new TwoWayNode();
-                newNode.info = ii;
+                TwoWayNode newNode = new TwoWayNode
+                {
+                    info = ii
+                };
                 TwoWayNode current = this;
                 Console.Write("\nBefore which Data You want to Store : ");
                 String cmp = Console.ReadLine();
@@ -142,8 +146,10 @@ namespace LinkList
             }
             else
             {
-                TwoWayNode newNode = new TwoWayNode();
-                newNode.info = ii;
+                TwoWayNode newNode = new TwoWayNode
+                {
+                    info = ii
+                };
                 TwoWayNode current = this;
                 while (current.next != null)
                 {
@@ -168,10 +174,12 @@ namespace LinkList
             }
             else
             {
-                TwoWayNode newNode = new TwoWayNode();
-                newNode.info = this.info;
-                newNode.next = this.next;
-                newNode.prev = this;
+                TwoWayNode newNode = new TwoWayNode
+                {
+                    info = this.info,
+                    next = this.next,
+                    prev = this
+                };
                 this.info = ii;
                 this.next = newNode;
             }
@@ -179,7 +187,7 @@ namespace LinkList
 
         void INode.DeleteNodes()
         {
-            bool b = new bool();
+            bool b;
             do
             {
                 const string C = " Please Insert Valid Choice\n";
@@ -233,7 +241,7 @@ namespace LinkList
                 else
                 {
                     current.prev.next = null;
-                    current = null;
+                   // current = null;
                 }
             }
         }
@@ -256,7 +264,7 @@ namespace LinkList
                 {
                     this.info = current.info;
                     this.next = current.next;
-                    current = null;
+                    //current = null;
                 }
             }
         }
@@ -289,7 +297,7 @@ namespace LinkList
                 else
                 {
                     current.prev.next = current.next;
-                    current = null;
+                    //current = null;
                 }
             }
         }

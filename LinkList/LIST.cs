@@ -40,20 +40,31 @@ namespace LinkList
             return this.next;
         }
 
-        public static void DisplayList(LIST ll)
+        public static void DisplayList(LIST ll, string type, ref int count)
         {
-            Console.WriteLine($"List Number {ll.index + 1}\n");
+            if (ll.type == type)
+            {
+                if(count == 0)
+                {
+                    if (type == "")
+                        type = "Unspecified";
+                    Console.Write($" All {type} Lists : ");
+                }
+                Console.Write((ll.index + 1) + "     ");
+                count++;
+            }
         }
 
         public void DeleteNext(ref LIST deleted)
         {
+            Console.WriteLine("Type :" + deleted.type);
             this.next = deleted.next;
             deleted = null;
         }
 
         public void LoadList()
         {
-            bool b = new bool();
+            bool b;
             if (type == "")
             {
                 do
@@ -129,5 +140,24 @@ namespace LinkList
             }
         }
 
+        internal static void MergeLists(ref LIST list, string v)
+        {
+            Console.Clear();
+            Console.WriteLine($"Merger of Lists \n {v}LinkedList\n");
+            int c = 0;
+            Program.DisplayList(list, v, ref c);
+            Console.WriteLine();
+            Console.WriteLine("Merge : ");
+            try {
+                Console.Write("1st List number :");
+                int one = Convert.ToInt32(Console.ReadLine());
+                Console.Write("2nd List Number : ");
+                int two = Convert.ToInt32(Console.ReadLine());
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
     }
 }
