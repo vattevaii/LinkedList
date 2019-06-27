@@ -11,6 +11,7 @@ namespace LinkList
         private string type;
         private INode head = null;
 
+        public string Type => type;
 
         public LIST(int i = 0, LIST nxt = null)
         {
@@ -57,7 +58,7 @@ namespace LinkList
 
         public void DeleteNext(ref LIST deleted)
         {
-            Console.WriteLine("Type :" + deleted.type);
+            Console.WriteLine("Type : " + deleted.type);
             this.next = deleted.next;
             deleted = null;
         }
@@ -79,23 +80,18 @@ namespace LinkList
                     switch (choice)
                     {
                         case "1":
-                            {
+                            
                                 type = "Normal";
                                 head = new NormalNode();
                                 break;
-                            }
                         case "2":
-                            {
                                 type = "Circular";
                                 head = new CircularNode();
                                 break;
-                            }
                         case "3":
-                            {
                                 type = "TwoWay";
                                 head = new TwoWayNode();
                                 break;
-                            }
                         case "4":
                             break;
                         default:
@@ -116,7 +112,6 @@ namespace LinkList
                     Option.OptionsCommon();
                     Console.Write("Your Choice : ");
                     string choice = Console.ReadLine();
-                    Console.WriteLine("\n");
                     switch (choice)
                     {
                         case "1":
@@ -132,7 +127,7 @@ namespace LinkList
                             b = false;
                             break;
                         default:
-                            Console.WriteLine(C);
+                            Console.Write(C);
                             Console.ReadKey();
                             break;
                     }
@@ -143,16 +138,19 @@ namespace LinkList
         internal static void MergeLists(ref LIST list, string v)
         {
             Console.Clear();
-            Console.WriteLine($"Merger of Lists \n {v}LinkedList\n");
+            Console.WriteLine($"Merger of {v} LinkedLists\n");
+            int neww = Program.CreateList(ref list);
+            System.Console.WriteLine("Merged LinkedList will be stored in List " + neww);
             int c = 0;
             Program.DisplayList(list, v, ref c);
             Console.WriteLine();
             Console.WriteLine("Merge : ");
+            int one,two;
             try {
                 Console.Write("1st List number :");
-                int one = Convert.ToInt32(Console.ReadLine());
+                one = Console.Read();
                 Console.Write("2nd List Number : ");
-                int two = Convert.ToInt32(Console.ReadLine());
+                two = Console.Read();
             }
             catch(Exception e)
             {

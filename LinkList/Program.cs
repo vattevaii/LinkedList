@@ -27,15 +27,19 @@ namespace LinkList
                 switch (choice)
                 {
                     case "1":
-                        CreateList(ref list);
+                        int dex = CreateList(ref list);
+                        Console.WriteLine($"List {dex} Created.");
                         break;
                     case "2":
                         int count = 0;
                         DisplayList(list, "",ref count);
+                        if(count != 0)System.Console.WriteLine();
                         count = 0;
                         DisplayList(list, "Normal",ref count);
+                        if(count != 0)System.Console.WriteLine();
                         count = 0;
                         DisplayList(list, "Circular", ref count);
+                        if(count != 0)System.Console.WriteLine();
                         count = 0;
                         DisplayList(list, "TwoWay", ref count);
                         break;
@@ -146,7 +150,7 @@ namespace LinkList
             //not Empty
             else
             {
-                     //Get valid Input
+            //Get valid Input
                 const string A = "Which List Do you Want to Delete\n?";
                 int input = ValidInput(A);
 
@@ -169,6 +173,7 @@ namespace LinkList
                 //First List = Second List
                 else if (p == null)
                 {
+                    Console.WriteLine("Type : " + l.Type);
                     ll = l.GetNext();
                     //l = null;
                     Console.WriteLine($"List {input + 1} was deleted..");
@@ -188,7 +193,7 @@ namespace LinkList
         /// NOTE : No data inserted
         /// </summary>
         /// <param name="ll"></param>
-        private static void CreateList(ref LIST ll)
+        public static int CreateList(ref LIST ll)
         {
             int ind; // = new int();
             if(ll == null)
@@ -202,7 +207,7 @@ namespace LinkList
                 ind = index.index + 1;
                 LIST.PutAnotherList(index, ind);
             }
-            Console.WriteLine($"List {ind + 1} Created.");
+            return (ind+1);
         }
 
 
@@ -218,7 +223,6 @@ namespace LinkList
             {
                 if(type == "")
                     Console.WriteLine("NO Lists CREATED...");
-                return;
             }
             else
             {
@@ -226,8 +230,7 @@ namespace LinkList
                 {
                     LIST.DisplayList(next, type, ref count);
                     next = next.GetNext();
-                }
-                Console.WriteLine("\n");
+                } 
             }
         }
 
@@ -277,7 +280,7 @@ namespace LinkList
                     return;
                 }
             }
-            Console.WriteLine(" \n\n ");
+            System.Console.Write("Insufficient number of lists.\nOr,YOU DID NOT CHOOSE TO MERGE");
         }
 //End Of Class PROGRAM
 

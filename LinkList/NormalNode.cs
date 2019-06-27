@@ -77,6 +77,7 @@ namespace LinkList
                 if(current == null)
                 {
                     Console.WriteLine($"{cmp} not found in Nodes..\n DATA NOT INSERTED");
+                    Console.ReadKey();
                 }
                 else
                 {
